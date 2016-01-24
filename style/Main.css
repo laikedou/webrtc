@@ -1,0 +1,275 @@
+
+body{
+    background: #999;
+    font-size:12px;
+    color:#fff;
+    font-family:"Microsoft Yahei";
+}
+*{
+  margin:0;
+  padding:0;
+}
+::selection{
+    color:#fff;
+    background:purple;
+}
+.dn{
+    display:none;
+}
+#container{
+    width:80%;
+    margin:20px;
+}
+.video-container{
+    width:70%;
+    float:left;
+    position: relative;
+}
+#debug-info{
+    position: fixed;
+    top:30px;
+    right:20px;
+    width:600px;
+    height:500px;
+    background:#fff;
+    z-index: 1;
+    overflow-y:auto;
+    overflow-x: hidden;
+}
+/*添加滚动条样式*/
+#debug-info::-webkit-scrollbar{
+    width:10px;
+    height:10px;
+}
+#debug-info::-webkit-scrollbar-track{
+    background: purple;
+}
+#debug-info::-webkit-scrollbar-button {
+    background: purple;
+}
+#debug-info::-webkit-scrollbar-thumb{
+    background: mediumpurple;
+}
+#debug-info button{
+    border:none;
+    outline: none;
+    border-radius:0.25em;
+    display:inline-block;
+    color:#fff;
+    font-size:1em;
+    padding:1em 2em;
+    margin:0.25em 0;
+    text-align: center;
+    cursor:pointer;
+    background: purple;
+    margin:10px 5px;
+}
+#debug-info button:hover{
+    background:mediumpurple;
+}
+#debug-info p{
+    color:#000;
+    margin:5px;
+}
+#debug-info textarea{
+    display:inline-block;
+    margin:5px;
+    width:95%;
+}
+.dialog-panel{
+    border:none;
+    padding:20px;
+    box-shadow:0px 0px 10px rgba(0,0,0,0.5);
+    min-width:250px;
+    text-align: center;
+}
+.dialog-panel p{
+    padding:10px 0px;
+}
+.dialog-panel button{
+    display:inline-block;
+    border:none;
+    width:60px;
+    height:30px;
+    line-height: 30px;
+    padding:0px 10px;
+    background: rosybrown;
+    text-align: center;
+    color:#fff;
+}
+.dialog-panel button:hover{
+    background: royalblue;
+}
+/*video控制条*/
+.per-video-container{
+    width:auto;
+    height:auto;
+    position: relative;
+    z-index: 1;
+    background: #000;
+    box-shadow: 0px 0px 8px  rgba(255,255,255,0.8);
+}
+.per-video-container h3.per-video-title{
+    width:100%;
+    height:2em;
+    line-height:2em;
+    text-indent:0.25em;
+    color:#fff;
+    background:rgba(172, 27, 206,0.5);
+    position: absolute;
+    left:0;
+    top:0;
+    z-index: 2;
+    font-size:1em;
+    font-weight:normal;
+    transition: opacity ease-in-out .3s;
+    padding:0.25em 0;
+    cursor: pointer;
+}
+.per-video-container h3.per-video-title:hover{
+    opacity: 0.5;
+}
+.per-video-container video{
+    width:100%;
+    height:100%;
+    position: relative;
+    left:0px;
+    top:0px;
+    z-index: 2;
+}
+.per-video-control-bar{
+    position: absolute;
+    width:100%;
+    height:3em;
+    left:0px;
+    bottom:0px;
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flex;
+    display:-ms-flexbox;
+    display:flex;
+    z-index: 3;
+}
+.video-pre-playing{
+    width:4em;
+    height:100%;
+    line-height: 3em;
+    text-align: center;
+    background: purple;
+    cursor: pointer;
+}
+.video-pre-playing:hover{
+    background: mediumpurple;
+}
+/*右键菜单*/
+.per_video_content_menu{
+  background: purple;
+  width:8em;
+  height:auto;
+  position: absolute;
+  left:100px;
+  top:100px;
+  z-index: 5;
+  padding:0.43em 0;
+}
+.per_video_content_menu li{
+  width:100%;
+  height:1.5em;
+  line-height: 1.5em;
+  text-align: center;
+  color:#fff;
+  border-bottom: 1px solid #000;
+  list-style-type: none;
+  padding:5px 0;
+  transition: all ease-in-out .3s;
+  cursor: pointer;
+}
+.per_video_content_menu li:last-child{
+  border-bottom: none;
+}
+.per_video_content_menu li:hover{
+  background: mediumpurple;
+}
+/*弹出层*/
+.video-dialog-mask{
+   width:100%;
+   height:100%;
+   position: absolute;
+   left:0px;
+   top:0px;
+   z-index: 10;
+}
+/*弹出层*/
+.video-dialog-mask{
+    width:100%;
+    height:100%;
+    position: absolute;
+    left:0px;
+    top:0px;
+    z-index: 10;
+    text-align: center;
+
+}
+@keyframes fadeIn {
+    from{background: rgba(0,0,0,0);opacity:0;}
+    to{background: rgba(0,0,0,0.8);opacity:1;}
+}
+@keyframes fadeOut {
+    from{background: rgba(0,0,0,0.8);opacity:1;}
+    to{background: rgba(0,0,0,0);opacity:0;}
+}
+.video-dialog-mask-fadeIn{
+    animation-name: fadeIn;
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear ;
+      background: rgba(0,0,0,0.8);
+      opacity:1;
+      z-index:10;
+}
+.video-dialog-mask-fadeOut{
+     animation-name: fadeOut;
+     animation-delay: 0s;
+     animation-direction: normal;
+     animation-duration: 1s;
+     animation-iteration-count: 1;
+     animation-timing-function: linear ;
+     background: rgba(0,0,0,0);
+     opacity:0;
+     z-index: 0;
+}
+.video-dialog-mask .video-dialog-content{
+   min-width:500px;
+   max-width:960px;
+   min-height:500px;
+   max-height:960px;
+   display:inline-block;
+   margin:100px 0 0 0;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0px 0px 25px rgba(255,255,255,0.5);
+}
+.video-dialog-mask .video-dialog-content img{
+    width:100%;
+    height:auto;
+}
+.video-dialog-mask .video-dialog-content button.btn{
+      border:none;
+      outline: none;
+      border-radius:0.25em;
+      display:inline-block;
+      color:#fff;
+      font-size:1em;
+      padding:1em 2em;
+      margin:0.25em 0;
+      text-align: center;
+    cursor:pointer;
+
+}
+.video-dialog-mask .video-dialog-content button.btn-download{
+    background:purple;
+}
+.video-dialog-mask .video-dialog-content button.btn-download:hover{
+    background: mediumpurple;
+}
