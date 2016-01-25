@@ -162,6 +162,14 @@ var webRtc = (function(options){
     var _debug_info = document.getElementById('debug-info');
     var _currentRemoteVideo = null;
     var _currentRemoteStream = null;
+    //p2p相关
+    var _peerConnection = null;
+    var _peerStarted = false;
+    var _mediaConstraints = {'mandatory':{
+        'offerToReceiveAudio':true,
+        'offerToReceiveVideo':true
+    }};
+    var _iceServers = []
     if(options){
         _defaultOpts=Tools.extends(_defaultOpts,options);
     }
@@ -282,7 +290,7 @@ var webRtc = (function(options){
     function snapShot(_per_video){
         var _original_mask_class = 'video-dialog-mask';
         if(!isHasStream(_per_video)){
-            alert("没有视频正在播放，无法进行截图！");
+            Tools.Alert("没有视频正在播放，无法进行截图！");
             return;
         }
         if(_dialog_mask){
@@ -349,12 +357,32 @@ var webRtc = (function(options){
             }
         });
     }
+    function initIceServers(){
+         //首先初始化iceServers
+          _iceServers.push({'url':'stun:stun.services.mozilla.com'});
+          _iceServers.push({
+            url: 'turn:turn.bistri.com:80',
+            credential: 'homeo',
+            username: 'homeo'});
+          _iceServers.push({
+            url: 'turn:turn.anyfirewall.com:443?transport=tcp',
+            credential: 'webrtc',
+            username: 'webrtc'});
+    }
+    function connect(){
+         
+    }
     function DebugLocalRemoteFn(){
         //在调试栏中创建远程对方的视频
         _currentRemoteVideo = createVideo('debug-info',false,'远程视频','600px','450px');
         //创建建立连接按钮 和 挂断按钮
         var _start_connect_btn = document.createElement('button');
         _start_connect_btn.innerHTML = '建立连接';
+        //添加ICE 服务器 像stun 这种服务器
+        initIceServers();
+        _start_connect_btn.addEventListener('click',function(){
+            Tools.Alert('正在建立连接请稍后.....');
+        });
         var _hang_up_btn = document.createElement('button');
         _hang_up_btn.innerHTML = '挂断';
         _debug_info.appendChild(_start_connect_btn);

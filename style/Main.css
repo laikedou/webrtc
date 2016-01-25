@@ -6,7 +6,6 @@ body{
     font-family:"Microsoft Yahei";
 }
 *{
-  margin:0;
   padding:0;
 }
 ::selection{
@@ -125,6 +124,7 @@ body{
     transition: opacity ease-in-out .3s;
     padding:0.25em 0;
     cursor: pointer;
+    margin:0px;
 }
 .per-video-container h3.per-video-title:hover{
     opacity: 0.5;
