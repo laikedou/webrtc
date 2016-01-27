@@ -193,6 +193,23 @@ function getScrollOffset(w){
           y : d.body.scrollTop
      }
 }
+//追加addEvent方法
+function addEvent(ele,type,fn,iscapture){
+      if(!iscapture) iscapture = false;
+      if(ele.addEventListener){
+            return ele.addEventListener(type, fn,iscapture);
+      }else if(ele.attachEvent){
+              return ele.attachEvent('on'+type,function(event){
+                     event = event || window.event;//兼容某些不支持event传递的浏览器
+                     fn.call(event);
+               });
+      }
+      //如果上述的两种方法都不支持那么就使用在documentElement元素上绑定on事件的方法 兼容所有浏览器
+      return ele['on'+type] = function (event){
+          event = event || window.event;
+          fn.call(event);
+      }
+}
 //webrtc
 var webRtc = (function(options){
     var _defaultOpts={};
