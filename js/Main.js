@@ -210,6 +210,41 @@ function addEvent(ele,type,fn,iscapture){
           fn.call(event);
       }
 }
+//新增操作node节点的函数兼容大部分现代浏览器
+function parent(ele,n){
+     if(n === undefined) n =1;
+     while(n-- && ele) ele = ele.parentNode;
+     if(!ele || ele.nodeType !==1) return null;//排除像fragmentElement这种 必须是element元素才行
+     //否则返回
+     return ele; 
+}
+//新增获取兄弟元素方法
+/**
+@ele 当前元素
+@n 第几个兄弟元素
+*/
+function siblings(ele,n){
+      if(n === undefined) n =1;
+      while(ele && n !== 0){
+           if(n > 0){
+              if(ele.nextElementSibling){
+                ele = ele.nextElementSibling
+              }else{
+                for(ele = ele.nextSibling;ele && ele.nodeType !== 1;ele = ele.nextSibling);//空循环
+              } 
+              n--;
+           }else{
+              if(ele.previousElementSibling){
+                ele = ele.previousElementSibling;
+              }else{
+                 for(ele = ele.previousSibling;ele && ele.nodeType !== 1;ele = ele.previousSibling)
+              }
+              n++;
+           }
+
+      }
+      return ele;//返回兄弟元素
+}
 //webrtc
 var webRtc = (function(options){
     var _defaultOpts={};
