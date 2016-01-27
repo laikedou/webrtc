@@ -205,7 +205,7 @@ function addEvent(ele,type,fn,iscapture){
                });
       }
       //如果上述的两种方法都不支持那么就使用在documentElement元素上绑定on事件的方法 兼容所有浏览器
-      return ele['on'+type] = function (event){
+      ele['on'+type] = function (event){
           event = event || window.event;
           fn.call(event);
       }
