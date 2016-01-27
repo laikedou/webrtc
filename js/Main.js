@@ -176,6 +176,23 @@ var whenReady = (function(){
         }
     }
 }());
+//查询滚动条窗口的位置  用于计算文档坐标位置
+function getScrollOffset(w){
+     w = w || window;
+     if(w.pageXOffset) return {x:w.pageXOffset,y:w.pageYOffset};
+     var d = w.document;
+     if(document.compatMode === 'CSS1Compat'){
+         return {
+              x: d.docuemntElement.scrollLeft,
+              y: d.docuemntElement.scrollTop
+         }
+     }
+     //如果是怪异模式的话那么
+     return {
+          x : d.body.scrollLeft,
+          y : d.body.scrollTop
+     }
+}
 //webrtc
 var webRtc = (function(options){
     var _defaultOpts={};
