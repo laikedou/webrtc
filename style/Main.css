@@ -354,3 +354,7 @@ body{
 .video-dialog-mask .video-dialog-content button.btn-download:hover{
     background: mediumpurple;
 }
+
+/*拖动样式start 使用cursor:move 来显示可以拖动的鼠标图标*/
+
+/*拖动样式end*/
