@@ -1,0 +1,108 @@
+/*基础样式重置*/
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3,
+h4, h5, h6, pre, code, form, field set, legend,
+input, textarea, p, blockquote, th, td {
+  margin:0;
+  padding:0;
+	-webkit-appearance:none;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing:border-box;
+  box-sizing:border-box;
+  -webkit-text-size-adjust:none;
+  -ms-text-size-adjust:none;
+  text-size-adjust:none;
+  -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
+fieldset, img {
+  border:0;
+}
+
+address, caption, cite, code,
+dfn, em, strong, th, var {
+  font-style:normal;
+  font-weight:normal;
+}
+
+li {
+  list-style:none;
+}
+
+caption, th {
+  text-align:left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size:100%;
+  font-weight:normal;
+}
+abbr, acronym {
+  border:0;
+  font-variant:normal;
+}
+
+sup {
+  vertical-align:text-top;
+}
+
+sub {
+  vertical-align:text-bottom;
+}
+
+input, textarea, select {
+  font-family:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+}
+
+input:password {
+  ime-mode:disabled;
+}
+*:focus {
+  outline:none;
+}
+ul {
+  margin:0;
+	list-style:none;
+}
+a{
+  color:#2982e5;
+  text-decoration:none;
+}
+a:active {
+  color:#f60;
+}
+/*对话框弹出样式*/
+.dialog-panel{
+    border:none;
+    padding:20px;
+    -webkit-box-shadow:0px 0px 10px rgba(0,0,0,0.5);
+       -moz-box-shadow:0px 0px 10px rgba(0,0,0,0.5);
+            box-shadow:0px 0px 10px rgba(0,0,0,0.5);
+    min-width:250px;
+    text-align: center;
+}
+.dialog-panel p{
+    padding:10px 0px;
+}
+.dialog-panel button{
+    display:inline-block;
+    border:none;
+    width:60px;
+    height:30px;
+    line-height: 30px;
+    padding:0px 10px;
+    background: rosybrown;
+    text-align: center;
+    color:#fff;
+}
+.dialog-panel button:hover{
+    background: royalblue;
+}
