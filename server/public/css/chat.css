@@ -106,3 +106,120 @@ a:active {
 .dialog-panel button:hover{
     background: royalblue;
 }
+
+body{
+  font-size:12px;
+  color:#535353;
+  font-family: Arial;
+  background: #f4f4f4;
+}
+
+.chat-message-box{
+  width:30.833em;
+  height:44.167em;
+  background: rgba(210,210,210,0.25);
+  border:1px solid rgba(224,224,224,0.55);
+  box-shadow:0px 0px 3.16em rgba(0,0,0,0.1) ;
+  margin: 50px auto;
+}
+.chat-message-title-bar{
+  width:100%;
+  height:3.667em;
+  line-height: 3.667em;
+  display:flex;
+  background: #fff;
+}
+.chat-message-title-bar h2{
+   text-align: left;
+   text-indent: 1.667em;
+   font-size: 1.167em;
+   color:#212121;
+   font-weight: bold;
+   flex: 1;
+}
+button.btn,a.btn{
+  display:inline-block;
+  width:1.667em;
+  height:1.333em;
+  border:none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+button.btn-setting{background: url(../images/icon_setting.png) no-repeat center top;margin:1.167em 0 0 0;}
+button.btn-close{background: url(../images/icon_close.png) no-repeat center top;margin:1.167em 1.667em 0 0.833em;}
+.chat-message-title-tools{
+  width:6.8em;
+}
+.chat-messages{
+   padding:3.583em 1.5em 0em 1.5em;
+}
+ .chat-message{
+  width:100%;
+  height:15.167em;
+  margin:0 0 2.75em 0;
+  display:flex;
+}
+ .chat-message figure{
+  margin:0;
+  width:4.167em;
+  height:100%;
+  margin:0 0 0 1em;
+}
+ .chat-message-container{
+  flex:1;
+  border:1px solid #e9e9e9;
+  border-radius: 3px;
+  height:100%;
+  background:#fff;
+  position: relative;
+  padding:1.333em 1.917em;
+  font-size: 1.167em;
+  font-weight: bold;
+  line-height: 2em;
+  box-shadow: 0px 0px 1.333em rgba(0,0,0,0.1);
+}
+.chat-message-container:before{
+    content:"";
+    display:block;
+    background: #fff;
+    position: absolute;
+    right:-0.5em;
+    top:1.25em;
+    width:1em;
+    height:1em;
+    transform: rotate(45deg);
+}
+.chat-message-left{
+   flex-direction: row-reverse;
+}
+.chat-message-right{
+   flex-direction: row;
+}
+.chat-message-left   figure{
+  margin: 0 1em 0 0;
+}
+.chat-message-left .chat-message-container:before{
+  left:-0.5em;
+}
+.chat-message-typing-box{
+   width:100%;
+   border-top:1px solid #e9e9e9;
+   height:8.167em;
+   background: #fff;
+   position: relative;
+}
+.chat-message-typing-box textarea{
+  resize: none;
+  width:100%;
+  height:100%;
+  color:#d0d0d0;
+  font-weight: bold;
+  font-size:16px;
+  text-align: left;
+  text-indent:10px;
+  padding:10px;
+}
+.chat-message-typing-tools{
+  position:absolute;
+}

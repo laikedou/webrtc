@@ -10,20 +10,47 @@
 	<script src="/js/client.js" type="text/javascript" charset="utf-8" async></script>
 </head>
 <body>
-<style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
-    </style>
-	<ul id="messages"></ul>
-    <form action="" name="senbox" id="sendbox">
-      <input id="m" autocomplete="off"  value="" /><button>Send</button>
-    </form>
+    <!--聊天区域-->
+    <div  class="chat-message-box">
+         <div class="chat-message-title-bar">
+            <h2>James Dean</h2>
+            <div class="chat-message-title-tools">
+               <button type="button" class="btn btn-setting"></button>
+               <button type="button" class="btn btn-close"></button>
+            </div>
+         </div>
+         <ul id="messages" class="chat-messages">
+              <li class="chat-message chat-message-right">
+                  <div class="chat-message-container">
+                     I'd hate to be a teetotaler. Imagine getting up in the morning and knowing that's as good as you're going to feel all day.
+                  </div>
+                  <figure>
+                    <img src="/images/avatar1.png" alt="john">
+                  </figure>
+              </li>
+              <li class="chat-message chat-message-left">
+                  <div class="chat-message-container">
+                     I'd hate to be a teetotaler. Imagine getting up in the morning and knowing that's as good as you're going to feel all day.
+                  </div>
+                  <figure>
+                    <img src="/images/avatar1.png" alt="john">
+                  </figure>
+              </li>
+         </ul>
+         <div class="chat-message-typing-box">
+          <form action="" name="senbox" id="sendbox">
+                <textarea name="" id="m" placeholder=" Type a message …"></textarea>
+                <div class="chat-message-typing-tools">
+                    <a href="javascript:void(0)" class="btn btn-camera">camera</a>
+                    <a href="javascript:void(0)" class="btn btn-smile">simle</a>
+                    <a href="javascript:void(0)" class="btn btn-share">share</a>
+                </div>
+          </form>
+         </div>
+    </div>
+
+	
     
+
 </body>
 </html>
