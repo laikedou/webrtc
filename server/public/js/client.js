@@ -238,7 +238,8 @@ function siblings(ele,n){
               if(ele.previousElementSibling){
                 ele = ele.previousElementSibling;
               }else{
-                 for(ele = ele.previousSibling;ele && ele.nodeType !== 1;ele = ele.previousSibling)
+
+                 for(ele = ele.previousSibling;ele && ele.nodeType !== 1;ele = ele.previousSibling);
               }
               n++;
            }
@@ -251,15 +252,18 @@ function siblings(ele,n){
 //当dom加载完成进行初始化
 whenReady(function(){
      var socket = io();
-     document.senbox.onsubmit=function(){
+
+     document.forms.sendbox.onsubmit=function(){
+
       var m = document.getElementById('m');
-      socket.emit('chat message',m.text());
-      m.text = '';
+      console.log(m);
+      socket.emit('chat message',m.value);
+      m.value="";
       return false;
      }
-     var messages = docuemnt.getElementById('messages');
+     var messages = document.getElementById('messages');
      socket.on('chat message',function(msg){
-         var span  =docuemnt.createElement('span');
+         var span  =document.createElement('span');
          span.innerHTML = msg;
          messages.appendChild(span)
      });

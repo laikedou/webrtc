@@ -1,9 +1,13 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
+var path = require('path');
+var express = require('express')
+app.set('view engine','ejs');
+app.use(express.static(path.join(__dirname, 'public'))); 
 app.get('/', function(req, res){
-  res.sendFile(__dirname+'/chat.html');
+  //res.sendFile(__dirname+'/chat.html');
+  res.render('chat',{'title':'socket-chat demo','PUBLIC':__dirname+'/public'});
 });
 io.on('connection',function(socket){
 	  console.log('a user connected!\n');
