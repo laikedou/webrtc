@@ -115,12 +115,15 @@ body{
 }
 
 .chat-message-box{
-  width:30.833em;
-  height:44.167em;
+  width:70em;
+  height:auto;
   background: rgba(210,210,210,0.25);
   border:1px solid rgba(224,224,224,0.55);
   box-shadow:0px 0px 3.16em rgba(0,0,0,0.1) ;
   margin: 50px auto;
+  display: flex;
+  flex-direction:column;
+
 }
 .chat-message-title-bar{
   width:100%;
@@ -153,12 +156,28 @@ button.btn-close{background: url(../images/icon_close.png) no-repeat center top;
 }
 .chat-messages{
    padding:3.583em 1.5em 0em 1.5em;
+   height:32.5em;
+   overflow-y:scroll;
+}
+.chat-messages::-webkit-scrollbar{
+    width:10px;
+    height:10px;
+}
+.chat-messages::-webkit-scrollbar-track{
+    background: #333;
+}
+.chat-messages::-webkit-scrollbar-button {
+    background: #333;
+}
+.chat-messages::-webkit-scrollbar-thumb{
+    background: #fff;
 }
  .chat-message{
   width:100%;
   height:15.167em;
   margin:0 0 2.75em 0;
   display:flex;
+
 }
  .chat-message figure{
   margin:0;
@@ -166,11 +185,17 @@ button.btn-close{background: url(../images/icon_close.png) no-repeat center top;
   height:100%;
   margin:0 0 0 1em;
 }
+ .chat-message figure img{
+     border-radius: 0.5em;
+ }
+  .chat-message figure img:hover{
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+  }
  .chat-message-container{
   flex:1;
   border:1px solid #e9e9e9;
   border-radius: 3px;
-  height:100%;
+  height:auto;
   background:#fff;
   position: relative;
   padding:1.333em 1.917em;
@@ -208,6 +233,7 @@ button.btn-close{background: url(../images/icon_close.png) no-repeat center top;
    height:8.167em;
    background: #fff;
    position: relative;
+   margin:2.75em  0 0 0;
 }
 .chat-message-typing-box textarea{
   resize: none;
@@ -222,4 +248,23 @@ button.btn-close{background: url(../images/icon_close.png) no-repeat center top;
 }
 .chat-message-typing-tools{
   position:absolute;
+  width:7.667em;
+  height:3em;
+  right:2.250em;
+  bottom: 1.250em;
+}
+input.btn-submit{
+  background: #333;
+  border:none;
+  width:100%;
+  height:100%;
+  line-height: 150%;
+  color:#fff;
+  font-size: 1.5em;
+  text-align: center;
+  font-weight: 400;
+  cursor: pointer;
+}
+input.btn-submit:hover{
+  background: #666;
 }
