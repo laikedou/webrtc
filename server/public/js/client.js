@@ -248,23 +248,25 @@ function siblings(ele,n){
       return ele;//返回兄弟元素
 }
 
+var Chat = (function(){
+      var _socket = io();
+      var _username = '';
+      var _userid = '';
+      var _onlineuserlist = [];
+      var _onlineusercount = 0;
+      
+     function init(){
+         console.log('初始化.....');
+         _username = 'test';
 
+     }
+    return {
+        init:function(){
+             init();
+        }
+    }
+}());
 //当dom加载完成进行初始化
 whenReady(function(){
-     var socket = io();
-
-     document.forms.sendbox.onsubmit=function(){
-
-      var m = document.getElementById('m');
-      console.log(m);
-      socket.emit('chat message',m.value);
-      m.value="";
-      return false;
-     }
-     var messages = document.getElementById('messages');
-     socket.on('chat message',function(msg){
-         var span  =document.createElement('span');
-         span.innerHTML = msg;
-         messages.appendChild(span)
-     });
+    Chat.init(); 
 });

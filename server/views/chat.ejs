@@ -10,6 +10,34 @@
 	<script src="/js/client.js" type="text/javascript" charset="utf-8" async></script>
 </head>
 <body>
+   <div class="chat-login-panel">
+           <h2>登陆聊天室</h2>
+           <form name="login-box" method="post" >
+                      <div class="form-group-item">
+                               <input type="text" name="username" value='' class="txt" placeholder="please input your chat username!"/>
+                      </div>
+                      <div class="form-group-item">
+                              <img  src="/images/avatar1.png?=<%=version%>"/>
+                              <img  src="/images/avatar2.png?=<%=version%>"/>
+                              <img  src="/images/avatar3.jpg?=<%=version%>"/>
+                              <img  src="/images/avatar4.jpg?=<%=version%>"/>
+                              <img  src="/images/avatar5.jpg?=<%=version%>"/>
+                              <img  src="/images/avatar6.jpg?=<%=version%>"/>
+                      </div>
+                      <div class="form-group-item">
+                                <span class="label"> 男性</span>
+                                <input type="radio" checked="checked" id="sex-1" name="sex" value="male" />
+                                <label for="sex-1" class="radio"></label>
+                                <span class="label"> 女性</span>
+                                <input type="radio" name="sex" value="female"  id="sex-2" />
+                                <label for="sex-2" class="radio"></label>
+                      </div>
+                      <div class="form-group-item">
+                              <input type="submit" value='进入' class="btn-submit"/>
+                      </div>
+
+           </form>
+   </div>
     <!--聊天区域-->
     <div  class="chat-message-box">
          <div class="chat-message-title-bar">
