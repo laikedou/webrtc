@@ -10,23 +10,31 @@
 	<script src="/js/client.js" type="text/javascript" charset="utf-8" async></script>
 </head>
 <body>
-   <div class="chat-login-panel">
-           <h2>登陆聊天室</h2>
+   <div class="chat-login-panel" id="login-panel" style="display:block;opacity:1;">
+           <div class="chat-panel-title-bar">
+                       <h2>登陆聊天室</h2><a type="button" class="btn btn-close" href="#"></a>
+              </div>
            <form name="login-box" method="post" >
                       <div class="form-group-item">
-                               <input type="text" name="username" value='' class="txt" placeholder="please input your chat username!"/>
+                               <input type="text" name="username" value="" class="txt" placeholder="please input your chat username!"/>
                       </div>
                       <div class="form-group-item">
-                              <img  src="/images/avatar1.png?=<%=version%>"/>
-                              <img  src="/images/avatar2.png?=<%=version%>"/>
-                              <img  src="/images/avatar3.jpg?=<%=version%>"/>
-                              <img  src="/images/avatar4.jpg?=<%=version%>"/>
-                              <img  src="/images/avatar5.jpg?=<%=version%>"/>
-                              <img  src="/images/avatar6.jpg?=<%=version%>"/>
+                              <input type="radio" checked="checked" id="avatar-1" name="avatar" value="avatar1.png"  >
+                              <label for="avatar-1" class="img"><img  src="/images/avatar1.png?=<%=version%>"/></label>
+                              <input type="radio"  id="avatar-2" name="avatar" value="avatar2.png" />
+                              <label for="avatar-2" class="img"><img  src="/images/avatar2.png?=<%=version%>"/></label>
+                              <input type="radio"  id="avatar-3" name="avatar" value="avatar3.png" />
+                              <label for="avatar-3" class="img"><img  src="/images/avatar3.jpg?=<%=version%>"/></label>
+                              <input type="radio"  id="avatar-4" name="avatar" value="avatar4.png" />
+                              <label for="avatar-4" class="img"><img  src="/images/avatar4.jpg?=<%=version%>"/></label>
+                              <input type="radio" id="avatar-5" name="avatar" value="avatar5.png" />
+                              <label for="avatar-5" class="img"><img  src="/images/avatar5.jpg?=<%=version%>"/></label>
+                              <input type="radio"  id="avatar-6" name="avatar" value="avatar6.png" />
+                              <label for="avatar-6" class="img"><img  src="/images/avatar6.jpg?=<%=version%>"/></label>
                       </div>
                       <div class="form-group-item">
                                 <span class="label"> 男性</span>
-                                <input type="radio" checked="checked" id="sex-1" name="sex" value="male" />
+                                <input type="radio" checked="checked" id="sex-1" name="sex" value="male"  />
                                 <label for="sex-1" class="radio"></label>
                                 <span class="label"> 女性</span>
                                 <input type="radio" name="sex" value="female"  id="sex-2" />
@@ -38,13 +46,21 @@
 
            </form>
    </div>
+      <div class="chat-setting-panel" id="setting-panel">
+          <form name="setting-box" method="post" >
+              <div class="chat-panel-title-bar">
+                       <h2>设置中心</h2><a type="button" class="btn btn-close" href="#"></a>
+                 
+              </div>
+           </form>
+   </div>
     <!--聊天区域-->
-    <div  class="chat-message-box">
+    <div  class="chat-message-box" id="chat-panel" style="display:none;">
          <div class="chat-message-title-bar">
-            <h2>James Dean</h2>
+            <h2>Chat Room</h2>
             <div class="chat-message-title-tools">
-                 <button type="button" class="btn btn-setting"></button>
-                 <button type="button" class="btn btn-close"></button>
+                 <a type="button" class="btn btn-setting" href="#setting-panel"></a>
+                 <a type="button" class="btn btn-close" href="#chat-panel"></a>
             </div>
          </div>
          <ul id="messages" class="chat-messages">
@@ -54,6 +70,7 @@
                   </div>
                   <figure>
                     <img src="/images/avatar1.png" alt="john">
+                    <span class="username">John</span>
                   </figure>
               </li>
               <li class="chat-message chat-message-left">
@@ -62,6 +79,7 @@
                   </div>
                   <figure>
                     <img src="/images/avatar2.png" alt="john">
+                    <span class="username">John</span>
                   </figure>
               </li>
                <li class="chat-message chat-message-right">
@@ -70,6 +88,7 @@
                   </div>
                   <figure>
                     <img src="/images/avatar1.png" alt="john">
+                    <span class="username">John</span>
                   </figure>
               </li>
               <li class="chat-message chat-message-left">
@@ -78,12 +97,13 @@
                   </div>
                   <figure>
                     <img src="/images/avatar2.png" alt="john">
+                    <span class="username">John</span>
                   </figure>
               </li>
          </ul>
          <div class="chat-message-typing-box">
           <form action="" name="senbox" id="sendbox">
-                <textarea name="" id="m" placeholder=" Type a message …"></textarea>
+                <textarea name="message-box" id="message-box" placeholder=" Type a message …" value=""></textarea>
                 <div class="chat-message-typing-tools">
                     <input type="submit" class="btn-submit" value="发送">
                     <!--<a href="javascript:void(0)" class="btn btn-camera">camera</a>

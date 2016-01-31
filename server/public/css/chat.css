@@ -115,15 +115,13 @@ body{
 }
 
 .chat-message-box{
-  width:70em;
-  height:auto;
+  width:100%;
+  height:100%;
   background: rgba(210,210,210,0.25);
   border:1px solid rgba(224,224,224,0.55);
   box-shadow:0px 0px 3.16em rgba(0,0,0,0.1) ;
-  margin: 50px auto;
   display: flex;
   flex-direction:column;
-
 }
 .chat-message-title-bar{
   width:100%;
@@ -149,14 +147,17 @@ button.btn,a.btn{
   background: none;
   cursor: pointer;
 }
-button.btn-setting{background: url(../images/icon_setting.png) no-repeat center top;margin:1.167em 0 0 0;}
-button.btn-close{background: url(../images/icon_close.png) no-repeat center top;margin:1.167em 1.667em 0 0.833em;}
+button.btn-setting,a.btn-setting{background: url(../images/icon_setting.png) no-repeat center top;margin:1.167em 0 0 0;}
+#setting-panel:target,#login-panel:target{display:block;opacity: 1;}
+#chat-panel{opacity: 1;display:flex;}
+#chat-panel:target{opacity: 0;display:none;}
+button.btn-close,a.btn-close{background: url(../images/icon_close.png) no-repeat center top;margin:1.167em 1.667em 0 0.833em;}
 .chat-message-title-tools{
   width:6.8em;
 }
 .chat-messages{
    padding:3.583em 1.5em 0em 1.5em;
-   height:32.5em;
+   flex:1;
    overflow-y:scroll;
 }
 .chat-messages::-webkit-scrollbar{
@@ -174,7 +175,7 @@ button.btn-close{background: url(../images/icon_close.png) no-repeat center top;
 }
  .chat-message{
   width:100%;
-  height:15.167em;
+  height:auto;
   margin:0 0 2.75em 0;
   display:flex;
 
@@ -182,12 +183,22 @@ button.btn-close{background: url(../images/icon_close.png) no-repeat center top;
  .chat-message figure{
   margin:0;
   width:4.167em;
-  height:100%;
+  height:auto;
   margin:0 0 0 1em;
 }
  .chat-message figure img{
      border-radius: 0.5em;
  }
+  .chat-message figure span.username{
+    text-align: center;
+    display:inline-block;
+    width:100%;
+    font-weight: bold;
+    color:#999;
+    padding:0.25em 0;
+    overflow: hidden;
+    text-overflow:ellipsis;
+  }
   .chat-message figure img:hover{
     box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
   }
@@ -217,9 +228,11 @@ button.btn-close{background: url(../images/icon_close.png) no-repeat center top;
 }
 .chat-message-left{
    flex-direction: row-reverse;
+   align-items:flex-start;
 }
 .chat-message-right{
    flex-direction: row;
+   align-items:flex-start;
 }
 .chat-message-left   figure{
   margin: 0 1em 0 0;
@@ -280,15 +293,25 @@ input.btn-submit:hover{
   border:1px solid rgba(224,224,224,0.55);
   box-shadow:0px 0px 3.16em rgba(0,0,0,0.1) ;
   padding:2em;
+  display:none;
+  opacity: 0;
+  transition: all .3s ease-in;
 }
-.chat-login-panel h2{
-  width:100%;
-  height:2em;
-  line-height: 2em;
+.chat-login-panel .chat-panel-title-bar,.chat-setting-panel .chat-panel-title-bar{
+   width:100%;
+   height:2em;
+   line-height: 2em;
+   display:flex;
+}
+.chat-login-panel h2,.chat-setting-panel h2{
+  flex:1;
   text-align: left;
   color:#333;
   font-weight: bold;
   font-size: 1.6em;
+}
+.chat-setting-panel a.btn-close,.chat-login-panel a.btn-close{
+  margin:0;
 }
 .form-group-item {
   padding:1em 0;
@@ -299,7 +322,6 @@ input.btn-submit:hover{
   display:inline-block;
   width:51px;
   height:52px;
-  margin:0 5px 0 0;
 }
 .form-group-item  input.txt{
   width:100%;
@@ -319,7 +341,7 @@ input.btn-submit:hover{
 .form-group-item  span.label:first-child{
   padding:0;
 }
-.form-group-item  input[type=radio] +label{
+.form-group-item  input[type=radio] +label.radio{
    display:inline-block;
    position: relative;
    box-shadow: 0 1px 2px inset rgba(0,0,0,0.05), 0 -15px 10px -12px inset rgba(0,0,0,0.05);
@@ -329,10 +351,10 @@ input.btn-submit:hover{
    background: #fafafa;
    vertical-align: middle;
 }
-.form-group-item  input[type=radio] + label:active, .form-group-item  input[type=radio]  + label:active {
+.form-group-item  input[type=radio] + label.radio:active, .form-group-item  input[type=radio]  + label.radio:active {
   box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
 }
-.form-group-item  input[type=radio]:checked +label:after{
+.form-group-item  input[type=radio]:checked +label.radio:after{
  content: ' ';
   width:12px;
   height:12px;
@@ -344,12 +366,18 @@ input.btn-submit:hover{
   left:3px;
   font-size:32px;
 }
-.form-group-item  input[type=radio]:checked +label{
+.form-group-item  input[type=radio]:checked +label.radio{
   background: #e9ecee;
   color:#99a1a7;
   border: 1px solid #adb8c0;
 }
-
+.form-group-item  input[type=radio] +label.img{
+     display: inline-block;
+    margin:0 5px 0 0;
+}
+.form-group-item  input[type=radio]:checked +label.img{
+   border:1px solid #ff0000;
+}
 .form-group-item input.btn-submit{
    height:auto;
    padding:5px 0;

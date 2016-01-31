@@ -249,16 +249,75 @@ function siblings(ele,n){
 }
 
 var Chat = (function(){
-      var _socket = io();
+      var _socket = null;
       var _username = '';
+      var _sex  = 'male';
+      var _avatar = 'avatar1.png';
       var _userid = '';
+      var _user_self ={};
       var _onlineuserlist = [];
       var _onlineusercount = 0;
-      
-     function init(){
-         console.log('初始化.....');
-         _username = 'test';
+      var _login_panel = document.getElementById('login-panel');
+      var _chat_panel = document.getElementById('chat-panel');
+      var _login_form = document.querySelector('form[name=login-box]');
+      var _chat_form = document.querySelector('form[name=senbox]');
+      var _username_input = document.querySelector('input[name=username]');
+      var _avatar_input = document.querySelector('input[name=avatar]:checked');
+      var _sex_input = document.querySelector('input[name=sex]:checked');
+      var _login_form_submit_btn = document.querySelector("#login-panel input[type=submit]");
+      var _messge_box = document.querySelector('textarea[name=message-box]');
 
+      //生成一个唯一的iD
+      function generUid(){
+         return new Date().getTime() + '' +Math.floor(Math.random() *899 +100);
+      }
+     function init(){
+         
+          _login_form.onsubmit = function(event){
+          event = event || window.event;
+          event.stopPropagation();
+          if(_username_input.value==""){
+                alert('请输入您的名字！');
+                return false;
+          }
+         _username = _username_input.value;
+         _sex = _sex_input.value;
+         _avatar = _avatar_input.value;
+         _userid = generUid();
+         _user_self.userid = _userid;
+         _user_self.avatar = _avatar;
+         _user_self.username = _username;
+         _user_self.sex = _sex;
+         //连接socket服务器
+         _socket = io.connect('http://127.0.0.1:4000');
+         _socket.on('connect_error',function(event){
+            console.log(event);
+         });
+         //告诉服务器端有用户登录
+         _socket.emit('login',{userid:_userid,username:_username,avatar:_avatar});
+         //监听用户登录
+         _socket.on('login',function(obj){
+              console.log(obj);
+         });
+         //隐藏登陆框显示聊天窗口
+         _chat_panel.style.display = 'flex';
+         _login_panel.style.display = 'none';
+         return false;
+
+       }
+       //监听发送消息的事件
+       _chat_form.onsubmit = function(event){
+          event = event || window.event;
+          event.stopPropagation();
+          if(_messge_box.value == ""){
+             alert('请输入聊天消息内容！');
+             return false;
+          }
+          io.emit('message',function(msgobj){
+                 
+          });
+          return false;
+       };
      }
     return {
         init:function(){
