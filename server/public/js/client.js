@@ -255,6 +255,7 @@ var Chat = (function(){
       var _avatar = 'avatar1.png';
       var _userid = '';
       var _user_self ={};
+      var _new_user = null;
       var _onlineuserlist = [];
       var _onlineusercount = 0;
       var _login_panel = document.getElementById('login-panel');
@@ -266,11 +267,64 @@ var Chat = (function(){
       var _sex_input = document.querySelector('input[name=sex]:checked');
       var _login_form_submit_btn = document.querySelector("#login-panel input[type=submit]");
       var _messge_box = document.querySelector('textarea[name=message-box]');
-
+      var _chat_room_users = document.querySelector('.chat-message-users');
+      var _message_container = document.querySelector('#messages');
+      var _close_chat_btn = document.querySelector('.chat-message-title-tools .btn-close');
+      function initClickEvent(){
+          var _avatar_labels = document.querySelectorAll(".form-group-item .img");
+          for(var i=0;i<_avatar_labels.length;i++){
+               _avatar_labels[i].addEventListener('click',function(){
+                          //this.addAttribute();
+               });
+          }
+      }
       //生成一个唯一的iD
       function generUid(){
          return new Date().getTime() + '' +Math.floor(Math.random() *899 +100);
       }
+      //退出
+      function loginOut(){
+         window.location.reload();
+      }
+      //滚动到聊天区域的最下面
+      function scrollToMsgBottom(){
+          _message_container.scrollTop = _message_container.scrollHeight - _message_container.offsetTop;
+      }
+      //更新系统信息
+      function updateSystemInfo(obj,act){
+           _onlineuserlist = obj.onlineUserList;
+           _onlineusercount = obj.onlineUserCount;
+           _new_user = obj.user;
+           var key;
+           var _users_html='';
+           var _seprator = ''
+           for (key in _onlineuserlist){
+                   if(_onlineuserlist.hasOwnProperty(key)){
+                      _users_html +=    '<span class="user">'+_seprator+_onlineuserlist[key].username+'</span>'; 
+                      _seprator = '、';
+                   }
+           }
+           _chat_room_users.innerHTML = '<span class="title">当前共有：<font class="col-red">'+_onlineusercount+' </font> 在线，在线列表：</span>' +_users_html;
+
+           var _join_out_li_container = document.createElement("li");
+           _join_out_li_container.className = "chat-message chat-message-join-out";
+           var _login_out_msg = (act == 'login') ? "加入聊天室" :"离开聊天室";
+           var _color = (act == 'login') ? "col-green" :"col-red";
+           _join_out_li_container.innerHTML = '<div class="info"><span class="'+_color+'"> '+_new_user.username+' '+_login_out_msg+'</span></div>';
+           _message_container.appendChild(_join_out_li_container);
+          
+      }
+      function onSubmitMsg(event){
+          if(_messge_box.value == ""){
+             alert('请输入聊天消息内容！');
+             return false;
+          }
+          _socket.emit('message',{username:_user_self.username,avatar:_user_self.avatar,content:_messge_box.value});
+          //清空输入的聊天信息
+          _messge_box.value= '';
+          scrollToMsgBottom();
+          return false;
+       }
      function init(){
          
           _login_form.onsubmit = function(event){
@@ -280,6 +334,7 @@ var Chat = (function(){
                 alert('请输入您的名字！');
                 return false;
           }
+          console.log(_avatar_input);
          _username = _username_input.value;
          _sex = _sex_input.value;
          _avatar = _avatar_input.value;
@@ -297,8 +352,40 @@ var Chat = (function(){
          _socket.emit('login',{userid:_userid,username:_username,avatar:_avatar});
          //监听用户登录
          _socket.on('login',function(obj){
-              console.log(obj);
+              updateSystemInfo(obj,'login');
          });
+         //监听用户退出
+         _socket.on('logout',function(obj){
+              updateSystemInfo(obj,'logout');
+         });
+         //监听聊天的信息
+         _socket.on('message',function(msgobj){
+                 var _msg_info_li = document.createElement('li');
+                 _msg_info_li.className = "chat-message";
+                 var isme = (_user_self.userid == msgobj.userid) ? true : false;
+                 if(isme){
+                   _msg_info_li.classList.add("chat-message-right");
+                 }else{
+                   _msg_info_li.classList.add("chat-message-left");
+                 }
+                 var _msg_info_message_container = document.createElement("div");
+                 _msg_info_message_container.className = "chat-message-container";
+                 var _msg_info_msg = document.createTextNode(msgobj.content);
+                 _msg_info_message_container.appendChild(_msg_info_msg);
+                var _msg_info_figure = document.createElement('figure');
+                var _msg_info_figure_img = document.createElement("img");
+                _msg_info_figure_img.src ="/images/"+msgobj.avatar ;
+                _msg_info_figure_img.alt = msgobj.username;
+                var _msg_info_figure_span = document.createElement('span');
+                _msg_info_figure_span.className = "username";
+                _msg_info_figure_span.innerHTML = msgobj.username;
+                _msg_info_figure.appendChild(_msg_info_figure_img);
+                _msg_info_figure.appendChild(_msg_info_figure_span);
+                _msg_info_li.appendChild(_msg_info_message_container);
+                _msg_info_li.appendChild(_msg_info_figure);
+                _message_container.appendChild(_msg_info_li);
+                
+        });
          //隐藏登陆框显示聊天窗口
          _chat_panel.style.display = 'flex';
          _login_panel.style.display = 'none';
@@ -306,19 +393,21 @@ var Chat = (function(){
 
        }
        //监听发送消息的事件
-       _chat_form.onsubmit = function(event){
+       _chat_form.onsubmit = onSubmitMsg;
+       //监听关闭或者退出聊天室的方法
+       _close_chat_btn.addEventListener('click',function(){
+           loginOut();
+       });
+       //监听keydown 事件
+       _messge_box.onkeydown = function(event){
           event = event || window.event;
-          event.stopPropagation();
-          if(_messge_box.value == ""){
-             alert('请输入聊天消息内容！');
-             return false;
+          if(event.keyCode === 13){
+            onSubmitMsg();
           }
-          io.emit('message',function(msgobj){
-                 
-          });
-          return false;
-       };
+       }
+       initClickEvent();
      }
+
     return {
         init:function(){
              init();

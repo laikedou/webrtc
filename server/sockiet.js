@@ -37,7 +37,7 @@ io.on('connection',function(socket){
 	  socket.on('disconnect',function(){
 	  	 console.log('user : '+socket.name+' has disconnected the chat server!\n');
 	  	 if(onlineUserList.hasOwnProperty(socket.userid)){
-	  	 	      var obj = {userid:socket.userid,username:onlineUserList[socket.userid]};
+	  	 	      var obj = {userid:socket.userid,username:onlineUserList[socket.userid].username};
                     //删除数组中的元素
 	  	  	 delete onlineUserList[socket.userid];
 	  	  	 onlineUserCount --;
@@ -46,7 +46,6 @@ io.on('connection',function(socket){
 	  	 }
 	  });
 	  socket.on('message',function(obj){
-
                        io.emit('message',obj);
                        console.log(obj.username+'说：'+obj.content);
                

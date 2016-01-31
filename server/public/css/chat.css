@@ -79,6 +79,12 @@ a{
 a:active {
   color:#f60;
 }
+.col-red{
+  color:red;
+}
+.col-green{
+  color:green;
+}
 /*对话框弹出样式*/
 .dialog-panel{
     border:none;
@@ -178,8 +184,42 @@ button.btn-close,a.btn-close{background: url(../images/icon_close.png) no-repeat
   height:auto;
   margin:0 0 2.75em 0;
   display:flex;
-
 }
+.chat-message-users{
+   flex-direction: row;
+   align-items:flex-start;
+   flex-wrap:wrap;
+}
+.chat-message span.title{
+  font-size: 16px;
+  padding-right:10px;
+}
+.chat-message span.user{
+  font-size: 12px;
+  padding:5px;
+  vertical-align: middle;
+  color:red;
+  font-weight:bold;
+}
+ .chat-message-users span.title, .chat-message-users span.user{
+  display:inline-block;
+    
+ }
+  .chat-message-join-out {
+       flex-direction: row;
+       align-items:center;
+  }
+ .chat-message-join-out .info{
+       height:2em;
+       font-size: 1em;
+       line-height: 2em;
+       border-radius: 0.25em;
+       box-shadow: 0 0 1em rgba(0,0,0,0.1);
+       background: #fff;
+       font-weight: bold;
+       text-align: center;
+       flex:1;
+ }
  .chat-message figure{
   margin:0;
   width:4.167em;
